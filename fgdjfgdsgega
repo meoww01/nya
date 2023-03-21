@@ -1,0 +1,54 @@
+[1mdiff --git a/main.py b/main.py[m
+[1mindex 0f93a7d..f9a66a5 100644[m
+[1m--- a/main.py[m
+[1m+++ b/main.py[m
+[36m@@ -1,6 +1,6 @@[m
+ import sys[m
+ from PyQt5.QtWidgets import (QApplication,QWidget,QPushButton,QVBoxLayout,[m
+[31m-                             QMessageBox)[m
+[32m+[m[32m                             QMessageBox, QPlainTextEdit, QHBoxLayout)[m
+ from PyQt5.QtGui import QIcon[m
+ [m
+ [m
+[36m@@ -11,12 +11,23 @@[m [mclass Calculator(QWidget):[m
+         self.initUI()[m
+         [m
+     def initUI(self):[m
+[32m+[m[32m        self.te1 = QPlainTextEdit()[m
+[32m+[m[32m        self.te1.setReadOnly(True)[m
+[32m+[m[41m        [m
+         self.btn1=QPushButton('Message',self)[m
+         self.btn1.clicked.connect(self.activateMessage)[m
+         [m
+[32m+[m[32m        self.btn2=QPushButton('Clear',self)[m
+[32m+[m[32m        self.btn2.clicked.connect(self.clearMessage)[m
+[32m+[m[41m        [m
+[32m+[m[32m        hbox = QHBoxLayout()[m
+[32m+[m[32m        hbox.addStretch(1)[m
+[32m+[m[32m        hbox.addWidget(self.btn1)[m
+[32m+[m[32m        hbox.addWidget(self.btn2)[m
+[32m+[m[41m        [m
+         vbox=QVBoxLayout()[m
+[31m-        vbox.addStretch(1)[m
+[31m-        vbox.addWidget(self.btn1)[m
+[32m+[m[32m        vbox.addWidget(self.te1)[m
+[32m+[m[32m        vbox.addLayout(hbox)[m
+         vbox.addStretch(1)[m
+         [m
+         self.setLayout(vbox)[m
+[36m@@ -27,7 +38,11 @@[m [mclass Calculator(QWidget):[m
+         self.show()[m
+         [m
+     def activateMessage(self):[m
+[31m-        QMessageBox.information(self,"information","Button clicked!")[m
+[32m+[m[32m        # QMessageBox.information(self, "information", "Button clicked!")[m
+[32m+[m[32m        self.te1.appendPlainText("Button clicked!")[m
+[32m+[m[41m        [m
+[32m+[m[32m    def clearMessage(self):[m
+[32m+[m[32m        self.te1.clear()[m
+         [m
+         [m
+ if __name__ == '__main__':[m
+[1mdiff --git a/test.txt b/test.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
